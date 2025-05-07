@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Gemstones - Premium Jewelry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d4af37; /* Gold color */
+            --secondary-color: #333;
+            --light-color: #f8f8f8;
+            --dark-color: #222;
+            --accent-color: #a67c52; /* Bronze accent */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c9a227;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .product-price span {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+        
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .cart-modal.open {
+            display: block;
+            transform: translateX(0);
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .cart-items {
+            padding: 1rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff5252;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-total {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            text-align: right;
+        }
+        
+        .cart-total-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-total-price {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cart-modal {
+                width: 100%;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Royal Gemstones</a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Shop</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <a href="#" class="cart-icon" id="cart-toggle">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Timeless Elegance, Crafted for You</h1>
+            <p>Discover our exquisite collection of handcrafted jewelry that tells your unique story</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="container" id="products">
+        <h2 class="section-title">Our Collections</h2>
+        <div class="products">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Diamond Necklace">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Eternal Diamond Necklace</h3>
+                    <div class="product-price">₹45,999 <span>₹59,999</span></div>
+                    <p class="product-description">18K white gold necklace with 0.5 carat brilliant cut diamond centerpiece.</p>
+                    <button class="add-to-cart" data-id="1" data-name="Eternal Diamond Necklace" data-price="45999" data-image="https://images.unsplash.com/photo-1603974379129-0b034765f9c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pearl Earrings">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pearl Drop Earrings</h3>
+                    <div class="product-price">₹22,500 <span>₹28,000</span></div>
+                    <p class="product-description">Luxurious freshwater pearl earrings with 14K gold accents.</p>
+                    <button class="add-to-cart" data-id="2" data-name="Pearl Drop Earrings" data-price="22500" data-image="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sapphire Ring">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Blue Sapphire Ring</h3>
+                    <div class="product-price">₹38,750 <span>₹45,000</span></div>
+                    <p class="product-description">14K yellow gold ring featuring a 1.2 carat natural blue sapphire.</p>
+                    <button class="add-to-cart" data-id="3" data-name="Blue Sapphire Ring" data-price="38750" data-image="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1728381031272-ba3f537feadd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2xhc3NpYyUyMEdvbGQlMjBCYW5nbGV8ZW58MHx8MHx8fDA%3D" alt="Gold Bangle">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Classic Gold Bangle</h3>
+                    <div class="product-price">₹32,999 <span>₹39,999</span></div>
+                    <p class="product-description">22K pure gold bangle with intricate traditional designs.</p>
+                    <button class="add-to-cart" data-id="4" data-name="Classic Gold Bangle" data-price="32999" data-image="https://images.unsplash.com/photo-1611591437281-4608be122683?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1676120963306-8969fa6a810e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8RW1lcmFsZCUyMEJyYWNlbGV0fGVufDB8fDB8fHww" alt="Emerald Bracelet">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Emerald Halo Bracelet</h3>
+                    <div class="product-price">₹52,500 <span>₹65,000</span></div>
+                    <p class="product-description">18K rose gold bracelet with alternating emerald and diamond accents.</p>
+                    <button class="add-to-cart" data-id="5" data-name="Emerald Halo Bracelet" data-price="52500" data-image="https://images.unsplash.com/photo-1603974379569-5b6bbe5c43d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://media.istockphoto.com/id/505744448/photo/gemstone-pendant.webp?a=1&b=1&s=612x612&w=0&k=20&c=b310Fu55K7ApKt69SyUhG41UjJ63BMsC6tdKtyX8454=" alt="Ruby Pendant">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Ruby Heart Pendant</h3>
+                    <div class="product-price">₹28,750 <span>₹35,000</span></div>
+                    <p class="product-description">14K white gold pendant with heart-shaped ruby and diamond accents.</p>
+                    <button class="add-to-cart" data-id="6" data-name="Ruby Heart Pendant" data-price="28750" data-image="https://images.unsplash.com/photo-1603974379975-1c0c47ea1a9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3>Your Shopping Bag</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <div class="cart-total-title">Total</div>
+            <div class="cart-total-price" id="cart-total-price">₹0</div>
+            <button class="btn checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>Royal Gemstones</h3>
+                <p>Creating timeless jewelry pieces since 1985. Each piece tells a story of craftsmanship and elegance.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Shop</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Jewel store,gurugram,haryana</li>
+                    <li><i class="fas fa-phone"></i> +91 8510932747</li>
+                    <li><i class="fas fa-envelope"></i> info@royalgemstones.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 10AM - 8PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Royal Gemstones. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Shopping Cart Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartToggle = document.getElementById('cart-toggle');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCart = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const cartCount = document.querySelector('.cart-count');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            let cart = [];
+            
+            // Toggle Cart Modal
+            cartToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                cartModal.classList.add('open');
+            });
+            
+            closeCart.addEventListener('click', function() {
+                cartModal.classList.remove('open');
+            });
+            
+            // Add to Cart
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = button.getAttribute('data-id');
+                    const name = button.getAttribute('data-name');
+                    const price = parseFloat(button.getAttribute('data-price'));
+                    const image = button.getAttribute('data-image');
+                    
+                    // Check if item already in cart
+                    const existingItem = cart.find(item => item.id === id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            id,
+                            name,
+                            price,
+                            image,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCart();
+                    cartModal.classList.add('open');
+                    
+                    // Add animation to button
+                    button.textContent = 'Added!';
+                    button.style.backgroundColor = '#4CAF50';
+                    setTimeout(() => {
+                        button.textContent = 'Add to Cart';
+                        button.style.backgroundColor = '';
+                    }, 1000);
+                });
+            });
+            
+            // Update Cart
+            function updateCart() {
+                // Update cart items display
+                cartItemsContainer.innerHTML = '';
+                
+                let total = 0;
+                
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-title">${item.name}</h4>
+                            <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')} × ${item.quantity}</div>
+                            <button class="remove-item" data-id="${item.id}">Remove</button>
+                        </div>
+                    `;
+                    
+                    cartItemsContainer.appendChild(cartItemElement);
+                });
+                
+                // Update total price
+                cartTotalPrice.textContent = `₹${total.toLocaleString('en-IN')}`;
+                
+                // Update cart count
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = button.getAttribute('data-id');
+                        cart = cart.filter(item => item.id !== id);
+                        updateCart();
+                    });
+                });
+            }
+            
+            // Close cart when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!cartModal.contains(e.target) && e.target !== cartToggle && !cartToggle.contains(e.target)) {
+                    cartModal.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
